@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Bitcoin Mining Energy Hotspots</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 100%);
+            color: #c9d1d9;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f7931a 0%, #ff6b35 100%);
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(247, 147, 26, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #fff;
+            opacity: 0.95;
+        }
+
+        .section {
+            background: #161b22;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #f7931a;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #30363d;
+        }
+
+        h3 {
+            color: #58a6ff;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: #0d1117;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(247, 147, 26, 0.2);
+            border-color: #f7931a;
+        }
+
+        .card h4 {
+            color: #f7931a;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .cost-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #21262d 0%, #30363d 100%);
+            color: #7ee787;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 10px 0;
+            border: 1px solid #7ee787;
+        }
+
+        .info-row {
+            margin: 8px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #8b949e;
+            font-weight: 600;
+            display: inline-block;
+            width: 120px;
+        }
+
+        .value {
+            color: #c9d1d9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #0d1117;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #21262d 0%, #30363d 100%);
+            color: #f7931a;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #f7931a;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        tr:hover {
+            background: #161b22;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin: 4px 4px 4px 0;
+            font-weight: 600;
+        }
+
+        .tag-green {
+            background: rgba(46, 160, 67, 0.2);
+            color: #7ee787;
+            border: 1px solid #7ee787;
+        }
+
+        .tag-orange {
+            background: rgba(247, 147, 26, 0.2);
+            color: #f7931a;
+            border: 1px solid #f7931a;
+        }
+
+        .tag-red {
+            background: rgba(248, 81, 73, 0.2);
+            color: #ff7b72;
+            border: 1px solid #ff7b72;
+        }
+
+        .tag-blue {
+            background: rgba(88, 166, 255, 0.2);
+            color: #58a6ff;
+            border: 1px solid #58a6ff;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #21262d 0%, #30363d 100%);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #30363d;
+        }
+
+        .stat-value {
+            font-size: 2.2em;
+            color: #f7931a;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #8b949e;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8b949e;
+            border-top: 1px solid #30363d;
+            margin-top: 60px;
+        }
+
+        .highlight {
+            background: rgba(247, 147, 26, 0.1);
+            padding: 20px;
+            border-left: 4px solid #f7931a;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        ul {
+            margin: 15px 0 15px 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ Global Bitcoin Mining Energy Hotspots</h1>
+            <p class="subtitle">Comprehensive Analysis of Low-Cost Mining Locations Worldwide</p>
+        </header>
+
+        <div class="section">
+            <h2>🌍 Overview</h2>
+            <p>Large-scale Bitcoin mining is driven above all by extremely low all-in power costs. The cheapest viable markets today range from heavily-subsidized hydro or fossil hubs to projects using stranded gas or off-grid renewables. Notable candidates include oil- and gas-rich nations with ultra-low tariffs, renewable power exporters, and industrialized markets with special crypto deals.</p>
+            
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <span class="stat-value">10+</span>
+                    <span class="stat-label">Prime Locations</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">1-8¢</span>
+                    <span class="stat-label">kWh Cost Range</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">5</span>
+                    <span class="stat-label">Energy Models</span>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>Key Evaluation Factors:</strong> Electricity cost (¢/kWh), climate (cool helps cooling), infrastructure (grid reliability, fiber, real estate), regulatory environment (mining legality, tariffs/taxes, curtailment rules), and scalability (MW availability, PPA options, land/fuel).
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 Ultra-Low-Cost Power: Subsidies and Stranded Fuels</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>🇮🇷 Iran</h4>
+                    <div class="cost-badge">0.2-5¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Status:</span>
+                        <span class="value">Crypto-friendly</span>
+                    </div>
+                    <p style="margin-top: 15px;">Behind-the-meter flared gas and wind power. Marathon Digital achieves sub-$0.018/kWh costs. Strong infrastructure and stable regulations.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">Stable</span>
+                        <span class="tag tag-blue">Scalable</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>🇴🇲 Oman/Qatar</h4>
+                    <div class="cost-badge">&lt;2-3¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Energy:</span>
+                        <span class="value">Gas flaring</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Climate:</span>
+                        <span class="value">Desert hot</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Status:</span>
+                        <span class="value">Encouraged</span>
+                    </div>
+                    <p style="margin-top: 15px;">Oman's 800 MW project repurposes flared gas. Off-grid operations next to oil wells deliver exceptional power costs.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">Ultra Cheap</span>
+                        <span class="tag tag-blue">Off-grid</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💧 Hydropower & Renewables: Green and Cheap</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>🇵🇾 Paraguay</h4>
+                    <div class="cost-badge">5-8¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Energy:</span>
+                        <span class="value">Itaipú Hydro</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Capacity:</span>
+                        <span class="value">32 TWh surplus</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Status:</span>
+                        <span class="value">Recent tariff hikes</span>
+                    </div>
+                    <p style="margin-top: 15px;">Massive hydro surplus from Itaipú (14 GW) and Yacyretá (4 GW) dams. HIVE runs 200 MW with fixed-rate hydroelectric power.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">Renewable</span>
+                        <span class="tag tag-blue">High Capacity</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>🇪🇹 Ethiopia</h4>
+                    <div class="cost-badge">3-4¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Energy:</span>
+                        <span class="value">GERD Hydro</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Hash:</span>
+                        <span class="value">~5% global</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Renewable:</span>
+                        <span class="value">92%</span>
+                    </div>
+                    <p style="margin-top: 15px;">Africa's largest hydro plant (8.5 GW GERD) with cool highland climate. Government-backed mining at competitive rates.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">92% Renewable</span>
+                        <span class="tag tag-orange">Political Risk</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>🇰🇬 Kyrgyzstan</h4>
+                    <div class="cost-badge">&lt;3¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Energy:</span>
+                        <span class="value">90% Hydro</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Climate:</span>
+                        <span class="value">Cold mountainous</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Emissions:</span>
+                        <span class="value">Near-zero</span>
+                    </div>
+                    <p style="margin-top: 15px;">Ultra-low operating costs with 90% hydro generation. Marathon, Riot, and CleanSpark deploy 100+ MW here.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">ESG Plus</span>
+                        <span class="tag tag-blue">Cold Climate</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>🇨🇦 Canada (Quebec)</h4>
+                    <div class="cost-badge">4.5-6¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Energy:</span>
+                        <span class="value">Alpine Hydro</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Capacity:</span>
+                        <span class="value">37 GW</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Grid:</span>
+                        <span class="value">Excellent</span>
+                    </div>
+                    <p style="margin-top: 15px;">Hydro-Québec's Rate CB offers competitive pricing. Frigid winters ideal for cooling with modern infrastructure.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">Stable</span>
+                        <span class="tag tag-blue">Premium Infra</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>🇮🇸 Iceland</h4>
+                    <div class="cost-badge">5-6.5¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Energy:</span>
+                        <span class="value">Geo/Hydro</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Renewable:</span>
+                        <span class="value">&gt;99%</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Climate:</span>
+                        <span class="value">Subarctic cold</span>
+                    </div>
+                    <p style="margin-top: 15px;">All-renewable grid with near-Arctic cooling. Limited scalability (~120 MW) due to island constraints.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">100% Green</span>
+                        <span class="tag tag-orange">Limited Scale</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Top Markets Comparison</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Country/Region</th>
+                            <th>Main Energy</th>
+                            <th>Cost</th>
+                            <th>Climate</th>
+                            <th>Regulatory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Iran</strong></td>
+                            <td>Oil/Gas (grid)</td>
+                            <td>0.2–5¢/kWh</td>
+                            <td>Hot, mild winters</td>
+                            <td>Permitted (with bans)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>USA (Texas)</strong></td>
+                            <td>Wind & flared gas</td>
+                            <td>1–4¢/kWh</td>
+                            <td>Hot summers</td>
+                            <td>Friendly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kazakhstan</strong></td>
+                            <td>Coal/Gas (grid)</td>
+                            <td>2–3¢/kWh</td>
+                            <td>Continental</td>
+                            <td>Regulated (tariffs)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Canada (QC)</strong></td>
+                            <td>Hydro/Electric</td>
+                            <td>4.5–6.0¢/kWh</td>
+                            <td>Cold year-round</td>
+                            <td>Permitted (bids)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Paraguay</strong></td>
+                            <td>Hydro (Itaipú)</td>
+                            <td>5–8¢/kWh</td>
+                            <td>Subtropical</td>
+                            <td>Permitted (recent hikes)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ethiopia</strong></td>
+                            <td>Hydro (GERD)</td>
+                            <td>3–4¢/kWh</td>
+                            <td>Highland/mild</td>
+                            <td>Permitted (state-led)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kyrgyzstan</strong></td>
+                            <td>Hydro (90%)</td>
+                            <td>&lt;3¢/kWh</td>
+                            <td>Mountainous/cold</td>
+                            <td>Permitted (open)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Oman/Qatar</strong></td>
+                            <td>Flaring Gas</td>
+                            <td>&lt;2–3¢/kWh</td>
+                            <td>Desert hot</td>
+                            <td>Permitted (encouraged)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Uzbekistan</strong></td>
+                            <td>Gas (grid)</td>
+                            <td>5–7¢/kWh</td>
+                            <td>Continental</td>
+                            <td>Permitted (incentives)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Russia</strong></td>
+                            <td>Hydro/Coal</td>
+                            <td>1–5¢/kWh</td>
+                            <td>Siberian cold</td>
+                            <td>Banned in parts (2024)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Iceland</strong></td>
+                            <td>Geo/Hydro</td>
+                            <td>5–6.5¢/kWh</td>
+                            <td>Subarctic cold</td>
+                            <td>Permitted (moratorium)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏭 Mining Site Case Examples</h2>
+            
+            <div class="card" style="margin-bottom: 20px;">
+                <h4>Marathon Digital (USA)</h4>
+                <p><strong>Capacity:</strong> 139 MW portfolio</p>
+                <p><strong>Setup:</strong> 25 MW off-grid flared gas (TX/ND) + 114 MW behind-the-meter wind</p>
+                <p><strong>Cost:</strong> Sub-$0.018/kWh on flared gas, zero-marginal-cost wind energy</p>
+                <p style="margin-top: 10px;">Marathon highlights innovative use of stranded energy resources with dedicated wind farms for mining operations.</p>
+            </div>
+
+            <div class="card" style="margin-bottom: 20px;">
+                <h4>HIVE Digital (Paraguay)</h4>
+                <p><strong>Capacity:</strong> 200 MW hydro site at Yguazú</p>
+                <p><strong>Production:</strong> ~8.5 BTC/day</p>
+                <p><strong>Expansion:</strong> Phase 3 adds 100 MW (Valenzuela) to reach 300 MW total</p>
+                <p style="margin-top: 10px;">CEO emphasizes "fixed-rate hydroelectric power" for cost predictability and long-term stability.</p>
+            </div>
+
+            <div class="card" style="margin-bottom: 20px;">
+                <h4>Government of Ethiopia</h4>
+                <p><strong>Contracts:</strong> 60+ signed with miners</p>
+                <p><strong>Hash Rate:</strong> ~5% of global hash</p>
+                <p><strong>Power Source:</strong> Unused GERD output at ~3¢/kWh</p>
+                <p style="margin-top: 10px;">Rapid growth with Chinese investors leveraging Ethiopia's renewable surplus and cool highland climate.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚙️ Energy Models</h2>
+            <p>Bitcoin mining operations utilize various configurations to optimize costs:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>Grid-tied (PPA)</h4>
+                    <p>Long-term power purchase agreements with utilities. Common in hydro-rich regions like Paraguay and Kyrgyzstan.</p>
+                </div>
+                <div class="card">
+                    <h4>Behind-the-meter</h4>
+                    <p>Owning generation assets (wind farms, solar) to power mines directly, eliminating transmission fees.</p>
+                </div>
+                <div class="card">
+                    <h4>Off-grid Flared Gas</h4>
+                    <p>Tapping stranded gas at oil fields. Common in Texas and Oman/Qatar oilfield operations.</p>
+                </div>
+                <div class="card">
+                    <h4>Hybrid Models</h4>
+                    <p>Solar+battery systems or co-location with industrial partners (aluminum smelters, water treatment).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 Summary</h2>
+            <p>Today's lowest-cost mining locations fall into four categories:</p>
+            
+            <div class="highlight">
+                <h3 style="margin-top: 0;">Resource-Rich Exporters</h3>
+                <p><strong>Paraguay, Ethiopia, Kyrgyzstan</strong> – Abundant renewables, very low cost, miner-friendly policies (though country risk varies).</p>
+            </div>
+
+            <div class="highlight">
+                <h3>Subsidy-Driven Producers</h3>
+                <p><strong>Iran, Venezuela, Russia</strong> – Ultra-cheap power via subsidies but high political and regulatory risk.</p>
+            </div>
+
+            <div class="highlight">
+                <h3>Industrialized Economies</h3>
+                <p><strong>USA, Canada, Iceland</strong> – Moderately cheap (3–6¢) but extremely stable and scalable with excellent cooling.</p>
+            </div>
+
+            <div class="highlight">
+                <h3>Stranded Gas Plays</h3>
+                <p><strong>Texas, Oman</strong> – Off-grid models delivering sub-2¢ effective costs by utilizing flared gas.</p>
+            </div>
+
+            <p style="margin-top: 30px;"><strong>Investment Considerations:</strong> Investors should weigh raw electricity price against regulatory stability, infrastructure quality, climate benefits, and scalability potential. The optimal location balances low cost with operational support and long-term viability.</p>
+
+            <div class="highlight" style="background: rgba(248, 81, 73, 0.1); border-left-color: #ff7b72;">
+                <strong>⚠️ Important:</strong> Always confirm local regulations and grid plans before committing capital. Mining policies can change rapidly with government priorities and energy constraints.
+            </div>
+        </div>
+
+        <footer>
+            <p>📊 Global Bitcoin Mining Energy Hotspots Analysis</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Data compiled from industry reports and mining operations worldwide</p>
+        </footer>
+    </div>
+</body>
+</html">
+                        <span class="label">Energy:</span>
+                        <span class="value">Subsidized Oil/Gas</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Climate:</span>
+                        <span class="value">Hot, mild winters</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Status:</span>
+                        <span class="value">Permitted with bans</span>
+                    </div>
+                    <p style="margin-top: 15px;">One of the world's cheapest mining jurisdictions by raw cost. Government subsidies bring costs as low as $0.002/kWh, though grid strain and policy swings create risk.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">Ultra Cheap</span>
+                        <span class="tag tag-red">High Risk</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>🇻🇪 Venezuela</h4>
+                    <div class="cost-badge">0.3-0.6¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Energy:</span>
+                        <span class="value">Oil-backed subsidies</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Climate:</span>
+                        <span class="value">Tropical</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Status:</span>
+                        <span class="value">Tightly controlled</span>
+                    </div>
+                    <p style="margin-top: 15px;">Ultra-low tariffs attract miners, but chronic blackouts and hyperinflation create serious operational hurdles.</p>
+                    <div style="margin-top: 10px;">
+                        <span class="tag tag-green">Lowest Price</span>
+                        <span class="tag tag-red">Country Risk</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>🇺🇸 Texas (USA)</h4>
+                    <div class="cost-badge">1-4¢/kWh</div>
+                    <div class="info-row">
+                        <span class="label">Energy:</span>
+                        <span class="value">Flared gas & wind</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Climate:</span>
+                        <span class="value">Hot summers</span>
+                    </div>
+                    <div class="info-row
